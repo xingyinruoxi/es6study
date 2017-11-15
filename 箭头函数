@@ -22,9 +22,18 @@
     3、如果箭头函数的代码块部分多于一条语句，就要使用大括号将它们括起来，并且使用return语句返回。
 
     var sum = (num1, num2) => { return num1 + num2; }
-    4、由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上括号。
+    4、由于大括号被解释为代码块，所以如果箭头函数直接返回一个对象，必须在对象外面加上小括号。
 
     var getTempItem = id => ({ id: id, name: "Temp" });
+   5、 箭头函数可以与变量解构结合使用。
+
+
+    const full = ({ first, last }) => first + ' ' + last;
+
+    // 等同于
+    function full(person) {
+      return person.first + ' ' + person.last;
+    }
 
 
 

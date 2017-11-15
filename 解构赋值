@@ -1,0 +1,93 @@
+一、数组的结构赋值
+    1、什么是解构？
+        ES6允许我们队数组和对象中提取值，对变量进行赋值，这被叫做“解构”。 通常我们像下面这样为变量赋值:
+        var a = 1;
+            b = 2;
+            c = 3;
+        但是，ES6允许我们像下面这样做：
+        var [a, b, c] = [1, 2, 3];
+        即从数组中提取值，按照位置的对应关系，对变量赋值。
+    2、嵌套数组解构
+        再来看看嵌套数组解构的例子：
+        var [foo, [[bar], baz]] = [1, [[2], 3]];
+        foo //1
+        bar //2
+        baz //3
+
+        var [,, third] = ['foo', 'bar', 'baz'];
+        third // 'baz'
+
+        var [head, ....tial]= [1, 2, 3, 4];
+        head //1
+        tail //[2, 3, 4]
+    3、解构不成功、解构失败
+        如果解构不成功，变量的值就等于undefined。以下几种情况均属于解构不成功：
+        // 以下均解构不成功
+        var [foo] = [];
+        var [foo] = 1;
+        var [foo] = "Hello";
+        var [foo] = false;
+        var [foo] = NaN;
+        还有，当对undefined和null解构时，就会报错
+        // 报错
+        var [foo] = undefined;
+        var [foo] = null;
+
+        为什么会报错呢？因为解构只能用于数组和对象，其它原始类型的值都可以转为相应的对象。但是，undefined和null不能转为对象，因此会报错。
+    4、解构赋值允许指定默认值
+        var [foo = true] = [];
+        foo //true
+    5、解构还适用于let和const命令
+        var [v1, v2, ...., vN] = array;
+        let [v1, v2, ...., vN] = array;
+        const [v1, v2, ...., vN] = array;
+二、对象的解构赋值
+    var {foo, bar} = {
+        foo: "aaa",
+        bar: "bbb"
+    };
+
+    foo //"aaa"
+    bar //"bbb"
+    和数组解构不同，对象解构时，对象的属性没有顺序，变量必须与属性同名才能取得正确的值。
+    var {bar, foo} = {
+        foo: "aaa",
+        bar: "bbb"
+    };
+
+    foo //"aaa"
+    bar //"bbb"
+
+
+    var {baz} = = {
+        foo: "aaa",
+        bar: "bbb"
+    };
+    baz //undefined
+
+    1、嵌套解构的对象
+        var o = {
+            p: [
+                "Hello",
+                { y: "World" }
+            ]
+        };
+
+        var { p: [x, { y }] } = o;
+        x //"Hello"
+        y //"world"
+    2、指定默认值的对象解构
+        var { x = 3 } = {};
+        x //3
+    3、特别注意
+        // 错误写法
+        var x;
+        { x } = {x : 1};
+        // SyntaxError: Syntax error
+
+        报错的原因是，JS引擎会将{x}理解成一个代码块，从而发生语法错误。解决的办法也很简单，只要不讲大括号写在行首，避免JS将其解释为代码块就行了。例如，像下面这样：
+        // 正确的写法
+        ({x}) = {x:1};
+
+        // 或者
+        ({x} = {x:1});

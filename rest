@@ -1,0 +1,30 @@
+1、Rest操作符和Spread操作都是用三个点（...）表示，但作用整好相反。Rest操作符一般用在函数参数的声明中，而Spread用在函数的调用中。
+  下面看个例子：
+
+  'use strict';
+
+  function func(...args){
+      console.log(args);//[1,2,3,4]
+  }
+
+  func(1,2,3,4);
+
+  我们知道在strict mode下，对arguments做了很多限制，而且arguments是个arrayLike对象，不能像操作数组那样直接操作它。但用Rest操作符以后，args参数就是一个数组了，任何操作数组的方法都可以直接对args使用。
+
+2、在看个例子：
+    'use strict';
+
+        function f(x, ...y) {
+            console.log(x,y);//a,["b","c"]
+        }
+        f('a', 'b', 'c');
+            f('a')//x='1',y=[]
+            f()//x=undefined,y=[]
+
+    上面的两个例子都是把Rest操作符放在了函数形参的最后，那么，Rest操作符能不能应用在函数形参的其它位置呢？答案是：No
+    function f(x, ...y,z) {//Uncaught SyntaxError: Rest parameter must be last formal parameter
+        console.log(x,y,z);
+    }
+    f('a', 'b', 'c');
+
+    其实也很好理解，Rest单词的意思就是剩余的，把剩余的都归集到一起，所以上面的z形参就没什么作用了。但是我在ES6的规范（14.1 Function Definitions）中并没有找到这种语法错误。

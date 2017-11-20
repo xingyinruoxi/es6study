@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>array.from</title>
+</head>
+<body>
+<script>
+    let arrayLike={
+        '0':'a',
+        '1':'b',
+        '2':'c',
+        length:3 //不能去掉
+    }
+
+    /*let arr1=[].slice.call(arrayLike);
+    console.log(arr1);*/
+
+    let arr2=Array.from(arrayLike);
+    console.log(arr2);
+</script>
+</body>
+</html>

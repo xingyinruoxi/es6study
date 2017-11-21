@@ -1,0 +1,58 @@
+1、Object.keys()
+    ES6 引入了Object.keys方法，返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（ enumerable ）属性的键名。
+
+    var obj = { foo: "bar", baz: 42 };
+    Object.keys(obj)
+    // ["foo", "baz"]
+
+    目前， ES7 有一个提案，引入了跟Object.keys配套的Object.values和Object.entries。
+    let {keys, values, entries} = Object;
+    let obj = { a: 1, b: 2, c: 3 };
+    for (let key of keys(obj)) {
+        console.log(key); // 'a', 'b', 'c'
+    }
+    for (let value of values(obj)) {
+        console.log(value); // 1, 2, 3
+    }
+    for (let [key, value] of entries(obj)) {
+    console.log([key, value]); // ['a', 1], ['b', 2], ['c', 3]
+    }
+2、Object.values()
+    Object.values方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（ enumerable ）属性的键值。
+    var obj = { foo: "bar", baz: 42 };
+    Object.values(obj)
+    // ["bar", 42]
+    返回数组的成员顺序，与本章的《属性的遍历》部分介绍的排列规则一致。
+    var obj = { 100: 'a', 2: 'b', 7: 'c' };
+    Object.values(obj)
+    // ["b", "c", "a"]
+3、Object.entries
+    Object.entries方法返回一个数组，成员是参数对象自身的（不含继承的）所有可遍历（ enumerable ）属性的键值对数组。
+    var obj = { foo: 'bar', baz: 42 };
+    Object.entries(obj)
+    // [ ["foo", "bar"], ["baz", 42] ]
+
+    Object.entries的基本用途是遍历对象的属性。
+    for (let [k, v] of Object.entries(obj)) {
+        console.log(`${JSON.stringify(k)}: ${JSON.stringify(v)}`);
+    }
+    // "one": 1
+    // "two": 2
+
+    自己实现Object.entries方法，非常简单。
+    function* entries(obj) {
+        for (let key of Object.keys(obj)) {
+            yield [key, obj[key]];
+        }
+    }
+    //  非 Generator 函数的版本
+    function entries(obj) {
+        let arr = [];
+        for (let key of Object.keys(obj)) {
+            arr.push([key, obj[key]]);
+        }
+        return arr;
+    }
+
+
+

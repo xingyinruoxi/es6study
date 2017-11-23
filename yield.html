@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function* numbers() {
+        console.log('开始');
+        let v1=yield 0;
+        console.log('v1=' + v1);
+        let v2=yield 1;
+        console.log('v2=' + v2);
+        return 5;
+    }
+    let nums=numbers();
+    console.log(nums.next(2));
+    console.log(nums.next(3));
+    console.log(nums.next(4));
+</script>
+</body>
+</html>
